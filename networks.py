@@ -41,3 +41,46 @@ aoutput = Flatten()(aconv4)
 
 alice = Model(inputs=[ainput0, ainput1],
               outputs=aoutput, name='alice')
+
+# Bob network
+binput0 = Input(shape=(m_bits,))  # ciphertext
+binput1 = Input(shape=(k_bits,))  # key
+binput = concatenate([binput0, binput1], axis=1)
+
+bdense1 = Dense(units=(m_bits + k_bits), activation='tanh')(binput)
+breshape = Reshape((m_bits + k_bits, 1,))(bdense1)
+
+bconv1 = Conv1D(filters=2, kernel_size=4, strides=1,
+                padding=pad, activation='tanh')(breshape)
+bconv2 = Conv1D(filters=4, kernel_size=2, strides=2,
+                padding=pad, activation='tanh')(bconv1)
+bconv3 = Conv1D(filters=4, kernel_size=1, strides=1,
+                padding=pad, activation='tanh')(bconv2)
+bconv4 = Conv1D(filters=1, kernel_size=1, strides=1,
+                padding=pad, activation='sigmoid')(bconv3)
+
+boutput = Flatten()(bconv4)
+
+
+bob = Model(inputs=[binput0, binput1],
+            outputs=boutput, name='bob')
+
+# # Eve network
+einput = Input(shape=(c_bits,))  # ciphertext only
+
+edense1 = Dense(units=(c_bits + k_bits), activation='tanh')(einput)
+edense2 = Dense(units=(c_bits + k_bits), activation='tanh')(edense1)
+ereshape = Reshape((c_bits + k_bits, 1,))(edense2)
+
+econv1 = Conv1D(filters=2, kernel_size=4, strides=1,
+                padding=pad, activation='tanh')(ereshape)
+econv2 = Conv1D(filters=4, kernel_size=2, strides=2,
+                padding=pad, activation='tanh')(econv1)
+econv3 = Conv1D(filters=4, kernel_size=1, strides=1,
+                padding=pad, activation='tanh')(econv2)
+econv4 = Conv1D(filters=1, kernel_size=1, strides=1,
+                padding=pad, activation='sigmoid')(econv3)
+
+eoutput = Flatten()(econv4)  # Eve's attempt at guessing the plaintext
+
+eve = Model(einput, eoutput, name='eve')
