@@ -4,9 +4,9 @@ from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.engine.input_layer import Input
 from tensorflow.python.keras.layers.core import Activation, Dense
 from tensorflow.python.keras.layers import Reshape, Flatten
-from tensorflow.python.keras import layers
 from tensorflow.python.keras.layers.convolutional import Conv1D
 from tensorflow.python.keras.layers.merge import concatenate
+from tensorflow import keras
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16
@@ -84,3 +84,27 @@ econv4 = Conv1D(filters=1, kernel_size=1, strides=1,
 eoutput = Flatten()(econv4)  # Eve's attempt at guessing the plaintext
 
 eve = Model(einput, eoutput, name='eve')
+
+# Loss and optimizer
+aliceout = alice([ainput0, ainput1])
+bobout = bob([aliceout, binput1])  # bob sees ciphertext AND key
+eveout = eve(aliceout)  # eve doesn't see the key
+
+eveloss = K.mean(K.sum(K.abs(ainput0 - eveout), axis=-1))
+bobloss = K.mean(K.sum(K.abs(ainput0 - bobout), axis=-1))
+
+abeloss = bobloss + K.square(m_bits/2 - eveloss) / \
+    ((m_bits//2)**2)  # alice-bob loss
+
+# Build and compile the ABE model, used for training Alice-Bob networks
+#
+abemodel = Model([ainput0, ainput1, binput1], bobout, name='abemodel')
+abemodel.add_loss(abeloss)
+abemodel.compile(optimizer='RMSprop')
+
+# Build and compile the Eve model, used for training Eve net (with Alice frozen)
+#
+alice.trainable = False
+evemodel = Model([ainput0, ainput1], eveout, name='evemodel')
+evemodel.add_loss(eveloss)
+evemodel.compile(optimizer='RMSprop')
