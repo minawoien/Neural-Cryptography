@@ -1,4 +1,4 @@
-from networks import alice, bob, abemodel, m_train, m_bits, k_bits, evemodel
+from NeuralCryptoBuilder import alice, bob, eve, abemodel, m_train, m_bits, k_bits, evemodel
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
@@ -23,7 +23,8 @@ while epoch < n_epochs:
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
             k_batch = np.random.randint(
                 0, 2, k_bits * batch_size).reshape(batch_size, k_bits)
-            loss = abemodel.train_on_batch([m_batch, k_batch, k_batch], None)
+            loss = abemodel.train_on_batch(
+                [m_batch, k_batch, k_batch], None)
 
         abelosses.append(loss)
         abeavg = np.mean(abelosses)
@@ -40,7 +41,7 @@ while epoch < n_epochs:
         for cycle in range(evecycles):
             m_batch = np.random.randint(
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
-            k_batch = np.random.randint(
+            k_batch = np.random.randint(  # guessing private key, input for eve should be cipertext and public key
                 0, 2, k_bits * batch_size).reshape(batch_size, k_bits)
             loss = evemodel.train_on_batch([m_batch, k_batch], None)
         evelosses.append(loss)
@@ -65,3 +66,39 @@ plt.ylabel("Loss", fontsize=13)
 plt.legend(fontsize=13)
 
 plt.show()
+
+
+# Test the model
+m_batch = np.random.randint(
+    0, 2, m_bits * batch_size).reshape(batch_size, m_bits).astype('float32')
+# guessing private key, input for eve should be cipertext and public key
+k_batch = np.random.randint(
+    0, 2, k_bits * batch_size).reshape(batch_size, k_bits).astype('float32')
+cipher = alice.predict([m_batch, k_batch])
+
+print(m_batch)  # original message
+
+decrypted = bob.predict([cipher, k_batch])
+print(decrypted)  # bob's attempt to decrypt
+decrypted_bits = np.round(decrypted).astype(int)
+print(decrypted_bits)
+
+correct_bits = np.sum(decrypted_bits == m_batch)
+total_bits = np.prod(decrypted_bits.shape)
+accuracy = correct_bits / total_bits * 100
+
+print(f"Number of correctly decrypted bits: {correct_bits}")
+print(f"Total number of bits: {total_bits}")
+print(f"Decryption accuracy: {accuracy}%")
+
+eve_decrypted = eve.predict(cipher)
+eve_decrypted_bits = np.round(eve_decrypted).astype(int)
+print(eve_decrypted_bits)
+
+correct_bits_eve = np.sum(eve_decrypted_bits == m_batch)
+total_bits = np.prod(eve_decrypted_bits.shape)
+accuracy_eve = correct_bits_eve / total_bits * 100
+
+print(f"Number of correctly decrypted bits by Eve: {correct_bits_eve}")
+print(f"Total number of bits: {total_bits}")
+print(f"Decryption accuracy by Eve: {accuracy_eve}%")
