@@ -25,7 +25,10 @@ class NeuralCryptoBuilder:
         return Reshape(shape)(layer)
 
     def build_alice_or_bob(self, name):
-        input0, input1 = self.build_input_layers((self.m_bits,))
+        if name == 'alice':
+            input0, input1 = self.build_input_layers((self.m_bits,))
+        else:
+            input0, input1 = self.build_input_layers((self.c_bits,))
         input = concatenate([input0, input1], axis=1)
 
         dense = self.build_dense_layer(input, self.m_bits + self.k_bits)
