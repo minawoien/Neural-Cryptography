@@ -1,4 +1,4 @@
-from NeuralCryptoBuilder import alice, bob, eve, abemodel, m_train, m_bits, k_bits, evemodel
+from networks import alice, bob, eve, abemodel, m_train, m_bits, k_bits, evemodel
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
