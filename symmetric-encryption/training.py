@@ -23,15 +23,17 @@ while epoch < n_epochs:
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
             k_batch = np.random.randint(
                 0, 2, k_bits * batch_size).reshape(batch_size, k_bits)
+            p_batch = np.random.randint(
+                0, 2, k_bits * batch_size).reshape(batch_size, k_bits)
             loss = abemodel.train_on_batch(
-                [m_batch, k_batch, k_batch], None)
+                [m_batch, k_batch, p_batch], None)
 
         abelosses.append(loss)
         abeavg = np.mean(abelosses)
 
         # Evaluate Bob's ability to decrypt a message
         m_enc = alice.predict([m_batch, k_batch])
-        m_dec = bob.predict([m_enc, k_batch])
+        m_dec = bob.predict([m_enc, p_batch])
         loss = np.mean(np.sum(np.abs(m_batch - m_dec), axis=-1))
         boblosses.append(loss)
         bobavg = np.mean(boblosses)
@@ -41,8 +43,6 @@ while epoch < n_epochs:
         for cycle in range(evecycles):
             m_batch = np.random.randint(
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
-            k_batch = np.random.randint(  # guessing private key, input for eve should be cipertext and public key
-                0, 2, k_bits * batch_size).reshape(batch_size, k_bits)
             loss = evemodel.train_on_batch([m_batch, k_batch], None)
         evelosses.append(loss)
         eveavg = np.mean(evelosses)
