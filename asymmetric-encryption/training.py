@@ -10,7 +10,7 @@ batch_size = 512  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
 abecycles = 1  # number of times Alice and Bob network train per iteration
-evecycles = 2  # number of times Eve network train per iterati  on
+evecycles = 1  # number of times Eve network train per iteration
 
 epoch = 0
 while epoch < n_epochs:
@@ -26,9 +26,7 @@ while epoch < n_epochs:
             m_batch = np.random.randint(
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
 
-            # Generate a new key pair for each batch
             private_arr, public_arr = generate_key_pair(batch_size)
-
             loss = abemodel.train_on_batch(
                 [m_batch, public_arr, private_arr], None)  # calculate the loss
 
@@ -72,8 +70,7 @@ plt.legend(fontsize=13)
 
 plt.show()
 
-
-with open('results.txt', "a") as f:
+with open('asymmetric-encryption/results.txt', "a") as f:
     f.write("Training complete.\n")
     f.write("Epochs: {}\n".format(n_epochs))
     f.write("Batch size: {}\n".format(batch_size))
