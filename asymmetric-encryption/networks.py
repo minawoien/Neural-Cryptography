@@ -1,6 +1,7 @@
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Reshape, Flatten, Input, Dense, Conv1D, concatenate, Embedding
+from keras.optimizers import Adam, RMSprop
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16  # message
@@ -10,8 +11,8 @@ c_bits = (m_bits+puk_bits)//2  # ciphertext
 pad = 'same'
 
 # Compute the size of the message space, used later in training
-m_train = 2**(m_bits)
-
+# m_train = 2**(m_bits)
+m_train = 1024000
 
 # Alice network
 ainput0 = Input(shape=(m_bits))  # message
@@ -100,6 +101,11 @@ abeloss = bobloss + K.square(m_bits/2 - eveloss) / \
 abemodel = Model([ainput0, ainput1, binput1],
                  bobout, name='abemodel')
 abemodel.add_loss(abeloss)
+
+
+# alice.compile(loss='mse', optimizer='sgd')
+# beoptim = RMSprop(lr=0.001)
+# eveoptim = RMSprop(lr=0.001)
 abemodel.compile(optimizer='RMSprop')
 
 # Build and compile the Eve model, used for training Eve net (with Alice frozen)

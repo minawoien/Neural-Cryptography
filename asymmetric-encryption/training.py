@@ -1,11 +1,26 @@
-from key.ElipticCurve import generate_key_pair
+from key.ElipticCurve_bkeys import generate_key_pair
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+import time
+from tensorflow.python.util import deprecation
+import tensorflow as tf
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '0'
+
+config = tf.ConfigProto()
+session = tf.Session(config=config)
+deprecation._PRINT_DEPRECATION_WARNINGS = True
+
+
+evelosses = []
+boblosses = []
+abelosses = []
 
 # number of training epochs, each time an epoch is completed, the model would have seen and learned from every example in the dataset once.
-n_epochs = 50
+n_epochs = 20
 batch_size = 512  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
@@ -13,11 +28,11 @@ abecycles = 1  # number of times Alice and Bob network train per iteration
 evecycles = 1  # number of times Eve network train per iteration
 
 epoch = 0
+start = time.time()
 while epoch < n_epochs:
-    print(f"Epoch: {epoch}")
-    evelosses = []
-    boblosses = []
-    abelosses = []
+    evelosses0 = []
+    boblosses0 = []
+    abelosses0 = []
     for iteration in range(n_batches):
         # Train the A-B+E network, train both Alice and Bob
         alice.trainable = True
@@ -30,25 +45,29 @@ while epoch < n_epochs:
             loss = abemodel.train_on_batch(
                 [m_batch, public_arr, private_arr], None)  # calculate the loss
 
-        abelosses.append(loss)
         # How well Alice's encryption and Bob's decryption work together
-        abeavg = np.mean(abelosses)
+        abelosses0.append(loss)
+        abelosses.append(loss)
+        abeavg = np.mean(abelosses0)
 
         # Evaluate Bob's ability to decrypt a message
         m_enc = alice.predict([m_batch, public_arr])
         m_dec = bob.predict([m_enc, private_arr])
         loss = np.mean(np.sum(np.abs(m_batch - m_dec), axis=-1))
+        boblosses0.append(loss)
         boblosses.append(loss)
-        bobavg = np.mean(boblosses)
+        bobavg = np.mean(boblosses0)
 
         # Train the EVE network
         alice.trainable = False
         for cycle in range(evecycles):
             m_batch = np.random.randint(
                 0, 2, m_bits * batch_size).reshape(batch_size, m_bits)
+            _, public_arr = generate_key_pair(batch_size)
             loss = evemodel.train_on_batch([m_batch, public_arr], None)
+        evelosses0.append(loss)
         evelosses.append(loss)
-        eveavg = np.mean(evelosses)
+        eveavg = np.mean(evelosses0)
 
         if iteration % max(1, (n_batches // 100)) == 0:
             print("\rEpoch {:3}: {:3}% | abe: {:2.3f} | eve: {:2.3f} | bob: {:2.3f}".format(
@@ -58,6 +77,8 @@ while epoch < n_epochs:
     epoch += 1
 
 print("Training complete.")
+end = time.time()
+print(end - start)
 steps = -1
 
 plt.figure(figsize=(7, 4))
