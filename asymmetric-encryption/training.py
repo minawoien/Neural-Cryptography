@@ -7,10 +7,10 @@ import time
 from tensorflow.python.util import deprecation
 import tensorflow as tf
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
-os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '0'
-
-tf.debugging.set_log_device_placement(True)
+os . environ['CUDA_VISIBLE_DEVICES'] = '2'
+config = tf.compat.v1.ConfigProto()
+config.gpu_options.allow_growth = True
+session = tf.compat.v1.Session(config=config)
 
 
 evelosses = []
