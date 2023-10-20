@@ -11,7 +11,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '0'
 
 config = tf.compat.v1.ConfigProto()
-session = tf.Session(config=config)
+session = tf.compat.v1.Session(config=config)
 deprecation._PRINT_DEPRECATION_WARNINGS = True
 
 
