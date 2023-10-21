@@ -11,8 +11,10 @@ c_bits = (m_bits+puk_bits)//2  # ciphertext
 pad = 'same'
 
 # Compute the size of the message space, used later in training
-m_train = 2**(m_bits)
+# m_train = 2**(m_bits)
 # m_train = 1024000
+m_train = 500000
+
 
 # Alice network
 ainput0 = Input(shape=(m_bits))  # message
