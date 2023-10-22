@@ -1,6 +1,8 @@
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Reshape, Flatten, Input, Dense, Conv1D, concatenate, Embedding
+from tensorflow.keras.layers import Reshape, Flatten, Input, Dense, Conv1D, concatenate
+import tensorflow as tf
+
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16  # message
