@@ -69,7 +69,7 @@ while epoch < n_epochs:
 
         if iteration % max(1, (n_batches // 100)) == 0:
             print("\rEpoch {:3}: {:3}% | abe: {:2.3f} | eve: {:2.3f} | bob: {:2.3f}".format(
-                epoch, 100 * iteration // n_batches, abeavg, eveavg, bobavg))
+                epoch, 100 * iteration // n_batches, abeavg, eveavg, bobavg), end="")
             sys.stdout.flush()
 
     epoch += 1
@@ -89,50 +89,50 @@ plt.legend(fontsize=13)
 
 plt.show()
 
-# with open('asymmetric-encryption/results.txt', "a") as f:
-#     f.write("Training complete.\n")
-#     f.write("Epochs: {}\n".format(n_epochs))
-#     f.write("Batch size: {}\n".format(batch_size))
-#     f.write("Iterations per epoch: {}\n".format(n_batches))
-#     f.write("Alice-Bob cycles per iteration: {}\n".format(abecycles))
-#     f.write("Eve cycles per iteration: {}\n".format(evecycles))
+with open('asymmetric-encryption/results.txt', "a") as f:
+    f.write("Training complete.\n")
+    f.write("Epochs: {}\n".format(n_epochs))
+    f.write("Batch size: {}\n".format(batch_size))
+    f.write("Iterations per epoch: {}\n".format(n_batches))
+    f.write("Alice-Bob cycles per iteration: {}\n".format(abecycles))
+    f.write("Eve cycles per iteration: {}\n".format(evecycles))
 
-#     # Test the model
-#     m_batch = np.random.randint(
-#         0, 2, m_bits * batch_size).reshape(batch_size, m_bits).astype('float32')
-#     # guessing private key, input for eve should be cipertext and public key
-#     cipher = alice.predict([m_batch, public_arr])
+    # Test the model
+    m_batch = np.random.randint(
+        0, 2, m_bits * batch_size).reshape(batch_size, m_bits).astype('float32')
+    # guessing private key, input for eve should be cipertext and public key
+    cipher = alice.predict([m_batch, public_arr])
 
-#     print(m_batch)  # original message
+    print(m_batch)  # original message
 
-#     decrypted = bob.predict([cipher, private_arr])
-#     print(decrypted)  # bob's attempt to decrypt
-#     decrypted_bits = np.round(decrypted).astype(int)
-#     print(decrypted_bits)
+    decrypted = bob.predict([cipher, private_arr])
+    print(decrypted)  # bob's attempt to decrypt
+    decrypted_bits = np.round(decrypted).astype(int)
+    print(decrypted_bits)
 
-#     correct_bits = np.sum(decrypted_bits == m_batch)
-#     total_bits = np.prod(decrypted_bits.shape)
-#     accuracy = correct_bits / total_bits * 100
+    correct_bits = np.sum(decrypted_bits == m_batch)
+    total_bits = np.prod(decrypted_bits.shape)
+    accuracy = correct_bits / total_bits * 100
 
-#     print(f"Number of correctly decrypted bits: {correct_bits}")
-#     print(f"Total number of bits: {total_bits}")
-#     print(f"Decryption accuracy: {accuracy}%")
+    print(f"Number of correctly decrypted bits: {correct_bits}")
+    print(f"Total number of bits: {total_bits}")
+    print(f"Decryption accuracy: {accuracy}%")
 
-#     eve_decrypted = eve.predict(cipher)
-#     eve_decrypted_bits = np.round(eve_decrypted).astype(int)
-#     print(eve_decrypted_bits)
+    eve_decrypted = eve.predict(cipher)
+    eve_decrypted_bits = np.round(eve_decrypted).astype(int)
+    print(eve_decrypted_bits)
 
-#     correct_bits_eve = np.sum(eve_decrypted_bits == m_batch)
-#     total_bits = np.prod(eve_decrypted_bits.shape)
-#     accuracy_eve = correct_bits_eve / total_bits * 100
+    correct_bits_eve = np.sum(eve_decrypted_bits == m_batch)
+    total_bits = np.prod(eve_decrypted_bits.shape)
+    accuracy_eve = correct_bits_eve / total_bits * 100
 
-#     print(f"Number of correctly decrypted bits by Eve: {correct_bits_eve}")
-#     print(f"Total number of bits: {total_bits}")
-#     print(f"Decryption accuracy by Eve: {accuracy_eve}%")
+    print(f"Number of correctly decrypted bits by Eve: {correct_bits_eve}")
+    print(f"Total number of bits: {total_bits}")
+    print(f"Decryption accuracy by Eve: {accuracy_eve}%")
 
-#     f.write(f"Total number of bits: {total_bits}\n")
-#     f.write(f"Number of correctly decrypted bits by Bob: {correct_bits}\n")
-#     f.write(f"Decryption accuracy by Bob: {accuracy}%\n")
-#     f.write(f"Number of correctly decrypted bits by Eve: {correct_bits_eve}\n")
-#     f.write(f"Decryption accuracy by Eve: {accuracy_eve}%\n")
-#     f.write("\n")
+    f.write(f"Total number of bits: {total_bits}\n")
+    f.write(f"Number of correctly decrypted bits by Bob: {correct_bits}\n")
+    f.write(f"Decryption accuracy by Bob: {accuracy}%\n")
+    f.write(f"Number of correctly decrypted bits by Eve: {correct_bits_eve}\n")
+    f.write(f"Decryption accuracy by Eve: {accuracy_eve}%\n")
+    f.write("\n")
