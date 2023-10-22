@@ -69,7 +69,7 @@ while epoch < n_epochs:
 
         if iteration % max(1, (n_batches // 100)) == 0:
             print("\rEpoch {:3}: {:3}% | abe: {:2.3f} | eve: {:2.3f} | bob: {:2.3f}".format(
-                epoch, 100 * iteration // n_batches, abeavg, eveavg, bobavg), end="")
+                epoch, 100 * iteration // n_batches, abeavg, eveavg, bobavg))
             sys.stdout.flush()
 
     epoch += 1
