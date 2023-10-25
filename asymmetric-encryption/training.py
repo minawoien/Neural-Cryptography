@@ -4,14 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
-from tensorflow.python.util import deprecation
-import tensorflow as tf
-import os
-os . environ['CUDA_VISIBLE_DEVICES'] = '2'
-config = tf.compat.v1.ConfigProto()
-config.gpu_options.allow_growth = True
-session = tf.compat.v1.Session(config=config)
-
 
 evelosses = []
 boblosses = []
@@ -19,7 +11,7 @@ abelosses = []
 
 # number of training epochs, each time an epoch is completed, the model would have seen and learned from every example in the dataset once.
 n_epochs = 20
-batch_size = 512  # number of training examples utilized in one iteration
+batch_size = 2000  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
 abecycles = 1  # number of times Alice and Bob network train per iteration
