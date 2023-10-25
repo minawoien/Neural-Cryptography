@@ -9,7 +9,7 @@ evelosses = []
 
 
 n_epochs = 20
-batch_size = 512
+batch_size = 1000
 n_batches = m_train // batch_size
 abecycles = 1
 evecycles = 1
