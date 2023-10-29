@@ -11,11 +11,11 @@ abelosses = []
 
 # number of training epochs, each time an epoch is completed, the model would have seen and learned from every example in the dataset once.
 n_epochs = 20
-batch_size = 2000  # number of training examples utilized in one iteration
+batch_size = 512  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
 abecycles = 1  # number of times Alice and Bob network train per iteration
-evecycles = 1  # number of times Eve network train per iteration
+evecycles = 2  # number of times Eve network train per iteration
 
 epoch = 0
 start = time.time()
@@ -80,8 +80,9 @@ plt.ylabel("Loss", fontsize=13)
 plt.legend(fontsize=13)
 
 plt.show()
+plt.savefig(f'modified-figures/{n_epochs}e_{batch_size}b_{m_train}m_0.0001lr_Adam_{evecycles}ec_2.png')
 
-with open('asymmetric-encryption/results.txt', "a") as f:
+with open('results.txt', "a") as f:
     f.write("Training complete.\n")
     f.write("Epochs: {}\n".format(n_epochs))
     f.write("Batch size: {}\n".format(batch_size))
@@ -92,6 +93,7 @@ with open('asymmetric-encryption/results.txt', "a") as f:
     # Test the model
     m_batch = np.random.randint(
         0, 2, m_bits * batch_size).reshape(batch_size, m_bits).astype('float32')
+    private_arr, public_arr = generate_key_pair(batch_size)
     # guessing private key, input for eve should be cipertext and public key
     cipher = alice.predict([m_batch, public_arr])
 
