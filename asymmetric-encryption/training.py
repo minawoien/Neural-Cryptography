@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
+import pandas as pd
+
 
 evelosses = []
 boblosses = []
@@ -71,6 +73,15 @@ end = time.time()
 print(end - start)
 steps = -1
 
+Biodata = {'ABloss': abelosses[:steps],
+           'Bobloss': boblosses[:steps],
+           'Eveloss': evelosses[:steps]}
+
+df = pd.DataFrame(Biodata)
+
+i = 1
+df.to_csv(f'test-{i}.csv', mode='a', index=False)
+
 plt.figure(figsize=(7, 4))
 plt.plot(abelosses[:steps], label='A-B')
 plt.plot(evelosses[:steps], label='Eve')
@@ -80,7 +91,8 @@ plt.ylabel("Loss", fontsize=13)
 plt.legend(fontsize=13)
 
 plt.show()
-plt.savefig(f'modified-figures/{n_epochs}e_{batch_size}b_{m_train}m_0.0001lr_Adam_{evecycles}ec_2.png')
+plt.savefig(
+    f'test-figures/restult-{i}.png')
 
 with open('results.txt', "a") as f:
     f.write("Training complete.\n")

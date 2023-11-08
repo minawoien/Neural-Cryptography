@@ -12,8 +12,8 @@ pad = 'same'
 
 # Compute the size of the message space, used later in training
 m_train = 2**(m_bits)
-#m_train = 1024000
-#m_train = 70000
+# m_train = 1024000
+# m_train = 70000
 
 # Alice network
 ainput0 = Input(shape=(m_bits))  # message
