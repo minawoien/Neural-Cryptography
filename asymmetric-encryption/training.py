@@ -79,7 +79,7 @@ Biodata = {'ABloss': abelosses[:steps],
 
 df = pd.DataFrame(Biodata)
 
-i = 2
+i = 3
 df.to_csv(f'test-{i}-1cycle.csv', mode='a', index=False)
 
 plt.figure(figsize=(7, 4))
