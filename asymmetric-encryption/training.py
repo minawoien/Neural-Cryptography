@@ -17,7 +17,7 @@ batch_size = 512  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
 abecycles = 1  # number of times Alice and Bob network train per iteration
-evecycles = 2  # number of times Eve network train per iteration
+evecycles = 1  # number of times Eve network train per iteration
 
 epoch = 0
 start = time.time()
@@ -79,8 +79,8 @@ Biodata = {'ABloss': abelosses[:steps],
 
 df = pd.DataFrame(Biodata)
 
-i = 4
-df.to_csv(f'test-{i}.csv', mode='a', index=False)
+i = 2
+df.to_csv(f'test-{i}-1cycle.csv', mode='a', index=False)
 
 plt.figure(figsize=(7, 4))
 plt.plot(abelosses[:steps], label='A-B')
@@ -92,7 +92,7 @@ plt.legend(fontsize=13)
 
 plt.show()
 plt.savefig(
-    f'test-figures/restult-{i}.png')
+    f'test-figures/restult-{i}-1cycle.png')
 
 with open('results.txt', "a") as f:
     f.write("Training complete.\n")
