@@ -3,9 +3,15 @@ import matplotlib.pyplot as plt
 
 # Initialize a figure
 plt.figure(figsize=(10, 6))
+plt.rc('font', size=12)  # controls default text size
+plt.rc('axes', titlesize=16)  # fontsize of the axes title
+plt.rc('axes', labelsize=14)  # fontsize of the x and y labels
+plt.rc('xtick', labelsize=12)  # fontsize of the tick labels
+plt.rc('ytick', labelsize=12)  # fontsize of the tick labels
+plt.rc('legend', fontsize=12)  # fontsize of the legend
 
 # Load each CSV file and plot
-num_files = 4
+num_files = 5
 ab_loss = []
 bob_loss = []
 eve_loss = []
@@ -61,13 +67,16 @@ average_ab = pd.concat(ab_loss, axis=1).mean(axis=1)
 average_bob = pd.concat(bob_loss, axis=1).mean(axis=1)
 average_eve = pd.concat(eve_loss, axis=1).mean(axis=1)
 
-plt.plot(x, average_ab, color='blue', linewidth=2, label='Average AB')
-plt.plot(x, average_bob, color='green', linewidth=2, label='Average Bob')
-plt.plot(x, average_eve, color='red', linewidth=2, label='Average Eve')
+plt.plot(x, average_ab, color='blue', linewidth=1, label='Average AB')
+plt.plot(x, average_bob, color='green', linewidth=1,
+         label='Average Bob')
+plt.plot(x, average_eve, color='red', linewidth=1,
+         label='Average Eve')
+
+plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 
 # Customization and saving the figure
-plt.xlabel('X-axis label')  # Replace with your actual label
-plt.ylabel('Y-axis label')  # Replace with your actual label
-plt.title('Combined Plots with Average Lines')
+plt.xlabel('Iterations')  # Replace with your actual label
+plt.ylabel('Loss')  # Replace with your actual label
 plt.legend()
 plt.show()
