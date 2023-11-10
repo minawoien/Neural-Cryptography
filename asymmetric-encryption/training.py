@@ -6,7 +6,7 @@ import sys
 import time
 import pandas as pd
 
-i = 5
+i = 1
 curve = curve.name
 
 evelosses = []
