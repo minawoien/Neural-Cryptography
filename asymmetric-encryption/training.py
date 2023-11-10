@@ -1,4 +1,4 @@
-from key.ElipticCurve_bkeys import generate_key_pair
+from key.ElipticCurve import generate_key_pair, curve
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,6 +6,8 @@ import sys
 import time
 import pandas as pd
 
+i = 5
+curve = curve.name
 
 evelosses = []
 boblosses = []
@@ -79,8 +81,7 @@ Biodata = {'ABloss': abelosses[:steps],
 
 df = pd.DataFrame(Biodata)
 
-i = 5
-df.to_csv(f'test-{i}-1cycle.csv', mode='a', index=False)
+df.to_csv(f'{curve}/{evecycles}cycle/test-{i}.csv', mode='a', index=False)
 
 plt.figure(figsize=(7, 4))
 plt.plot(abelosses[:steps], label='A-B')
@@ -92,7 +93,7 @@ plt.legend(fontsize=13)
 
 plt.show()
 plt.savefig(
-    f'test-figures/restult-{i}-1cycle.png')
+    f'{curve}/{evecycles}cycle/figures/restult-{i}.png')
 
 with open('results.txt', "a") as f:
     f.write("Training complete.\n")

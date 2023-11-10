@@ -25,7 +25,7 @@ min_eve, max_eve = None, None
 x = list(range(0, 2559))
 
 for i in range(1, num_files + 1):
-    df = pd.read_csv(f'test-{i}.csv')
+    df = pd.read_csv(f'test-{i}-1cycle.csv')
 
     # ABloss
     y_ab = df['ABloss']
