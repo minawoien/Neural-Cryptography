@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 import numpy as np
 
-curve = ec.SECP256R1()
+curve = ec.BrainpoolP256R1()
 
 
 def generate_key_pair(batch_size):
@@ -22,7 +22,6 @@ def generate_key_pair(batch_size):
 
 def convert_key_to_pem(batch_size, private_key, public_key):
     # Convert keys to PEM format
-    print(private_key.size_in_bits())
     private_pem = private_key.private_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PrivateFormat.TraditionalOpenSSL,
@@ -40,7 +39,3 @@ def convert_key_to_bit(batch_size, pem):
     bits = ''.join([format(ord(c), '08b') for c in pem])
     arr = np.array([int(bit) for bit in bits])
     return arr
-
-
-if __name__ == "__main__":
-    print(curve.name)
