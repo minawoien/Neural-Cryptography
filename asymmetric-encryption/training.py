@@ -1,3 +1,7 @@
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 from key.ElipticCurve import generate_key_pair, curve
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 import numpy as np
@@ -6,7 +10,7 @@ import sys
 import time
 import pandas as pd
 
-i = 2
+i = 5
 curve = curve.name
 
 evelosses = []
@@ -91,7 +95,6 @@ plt.xlabel("Iterations", fontsize=13)
 plt.ylabel("Loss", fontsize=13)
 plt.legend(fontsize=13)
 
-plt.show()
 plt.savefig(
     f'{curve}/{evecycles}cycle/figures/restult-{i}.png')
 
