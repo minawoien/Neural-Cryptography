@@ -3,13 +3,13 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 import numpy as np
 
-curve = ec.SECP521R1()
+curve = ec.SECP224R1()
 
 
 def generate_key_pair(batch_size):
     # Generate ECC private key
-    pr_arr = np.empty((batch_size, 2920))
-    pu_arr = np.empty((batch_size, 2144))
+    pr_arr = np.empty((batch_size, 1656))
+    pu_arr = np.empty((batch_size, 1296))
     for i in range(batch_size):
         private_key = ec.generate_private_key(
             curve, default_backend())

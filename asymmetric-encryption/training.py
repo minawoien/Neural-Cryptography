@@ -6,7 +6,7 @@ import sys
 import time
 import pandas as pd
 
-i = 1
+i = 2
 curve = curve.name
 
 evelosses = []
@@ -97,6 +97,7 @@ plt.savefig(
 
 with open('results.txt', "a") as f:
     f.write("Training complete.\n")
+    f.write(f"Curve: {curve}")
     f.write("Epochs: {}\n".format(n_epochs))
     f.write("Batch size: {}\n".format(batch_size))
     f.write("Iterations per epoch: {}\n".format(n_batches))
