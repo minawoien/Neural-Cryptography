@@ -13,6 +13,9 @@ plt.ylim(0, 8)
 
 # Load each CSV file and plot
 num_files = 5
+curve = 'secp256r1'
+cycles = 1
+
 ab_loss = []
 bob_loss = []
 eve_loss = []
@@ -26,7 +29,7 @@ min_eve, max_eve = None, None
 x = list(range(0, 2559))
 
 for i in range(1, num_files + 1):
-    df = pd.read_csv(f'test-{i}-1cycle.csv')
+    df = pd.read_csv(f'{curve}/{cycles}cycle/test-{i}.csv')
 
     # ABloss
     y_ab = df['ABloss']
