@@ -9,6 +9,7 @@ plt.rc('axes', labelsize=14)  # fontsize of the x and y labels
 plt.rc('xtick', labelsize=12)  # fontsize of the tick labels
 plt.rc('ytick', labelsize=12)  # fontsize of the tick labels
 plt.rc('legend', fontsize=12)  # fontsize of the legend
+plt.ylim(0, 8)
 
 # Load each CSV file and plot
 num_files = 5
