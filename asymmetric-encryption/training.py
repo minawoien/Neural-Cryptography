@@ -12,7 +12,7 @@ import numpy as np
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 from key.ElipticCurve import generate_key_pair, curve
 
-i = 5
+i = 1
 curve = curve.name
 
 evelosses = []
@@ -20,12 +20,12 @@ boblosses = []
 abelosses = []
 
 # number of training epochs, each time an epoch is completed, the model would have seen and learned from every example in the dataset once.
-n_epochs = 20
-batch_size = 512  # number of training examples utilized in one iteration
+n_epochs = 2
+batch_size = 5  # number of training examples utilized in one iteration
 # iterations per epoch, training examples divided by batch size
 n_batches = m_train // batch_size
 abecycles = 1  # number of times Alice and Bob network train per iteration
-evecycles = 1  # number of times Eve network train per iteration
+evecycles = 2  # number of times Eve network train per iteration
 
 epoch = 0
 start = time.time()

@@ -5,8 +5,8 @@ from tensorflow.keras.optimizers import Adam
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16  # message
-puk_bits = 2144  # public key
-prk_bits = 2920  # private key
+puk_bits = 1392  # public key
+prk_bits = 1784  # private key
 c_bits = (m_bits+puk_bits)//2  # ciphertext
 pad = 'same'
 
@@ -14,6 +14,7 @@ pad = 'same'
 m_train = 2**(m_bits)
 # m_train = 1024000
 # m_train = 70000
+m_train = 100
 
 # Alice network
 ainput0 = Input(shape=(m_bits))  # message
