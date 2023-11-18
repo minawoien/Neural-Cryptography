@@ -14,7 +14,6 @@ pad = 'same'
 m_train = 2**(m_bits)
 # m_train = 1024000
 # m_train = 70000
-m_train = 100
 
 # Alice network
 ainput0 = Input(shape=(m_bits))  # message
