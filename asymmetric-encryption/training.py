@@ -1,16 +1,16 @@
+import pandas as pd
+import time
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
+from key.ElipticCurve import generate_key_pair, curve
 import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-from key.ElipticCurve import generate_key_pair, curve
-from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
-import numpy as np
-import matplotlib.pyplot as plt
-import sys
-import time
-import pandas as pd
 
-i = 4
+i = 5
 curve = curve.name
 
 evelosses = []
