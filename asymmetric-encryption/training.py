@@ -1,3 +1,9 @@
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+
+
 import pandas as pd
 import time
 import sys
@@ -5,10 +11,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 from key.ElipticCurve import generate_key_pair, curve
-import os
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "7"
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 
 i = 5
 curve = curve.name
