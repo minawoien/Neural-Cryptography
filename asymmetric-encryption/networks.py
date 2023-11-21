@@ -5,8 +5,8 @@ from tensorflow.keras.optimizers import Adam
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16  # message
-puk_bits = 1392  # public key
-prk_bits = 1784  # private key
+puk_bits = 1720  # public key
+prk_bits = 2304  # private key
 c_bits = (m_bits+puk_bits)//2  # ciphertext
 pad = 'same'
 
