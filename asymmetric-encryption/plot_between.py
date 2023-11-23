@@ -12,7 +12,7 @@ plt.rc('legend', fontsize=12)  # fontsize of the legend
 plt.ylim(0, 8)
 
 # Load each CSV file and plot
-num_files = 3
+num_files = 5
 curve = 'secp256k1'
 cycles = 2
 
@@ -84,5 +84,5 @@ plt.xlabel('Iterations')  # Replace with your actual label
 plt.ylabel('Loss')  # Replace with your actual label
 plt.legend()
 
-plt.savefig(f"key-figures/{curve}-{cycles}cycle.png", )
+plt.savefig(f"key-figures/{curve}-{cycles}cycle.pdf", bbox_inches='tight')
 plt.show()
