@@ -1204,6 +1204,7 @@ Number of correctly decrypted bits by Eve: 42
 Decryption accuracy by Eve: 52.5%
 
 Training complete.
+Curve: secp224r1
 Epochs: 20
 Batch size: 512
 Iterations per epoch: 128

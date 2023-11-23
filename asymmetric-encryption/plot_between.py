@@ -13,7 +13,7 @@ plt.ylim(0, 8)
 
 # Load each CSV file and plot
 num_files = 5
-curve = 'secp256k1'
+curve = 'secp521r1'
 cycles = 2
 
 ab_loss = []
@@ -85,4 +85,3 @@ plt.ylabel('Loss')  # Replace with your actual label
 plt.legend()
 
 plt.savefig(f"key-figures/{curve}-{cycles}cycle.pdf", bbox_inches='tight')
-plt.show()
