@@ -12,7 +12,7 @@ import numpy as np
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
 from key.ElipticCurve import generate_key_pair, curve
 
-i = 1
+i = 3
 curve = curve.name
 
 evelosses = []
