@@ -1,0 +1,42 @@
+WARNING:tensorflow:From /home/stud/minawoi/miniconda3/envs/conda-venv/lib/python3.7/site-packages/tensorflow_core/python/ops/resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2023-11-23 10:24:41.845318: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2023-11-23 10:24:42.044417: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla V100-PCIE-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.38
+pciBusID: 0000:8a:00.0
+2023-11-23 10:24:42.046512: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2023-11-23 10:24:42.050343: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2023-11-23 10:24:42.053767: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2023-11-23 10:24:42.055752: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2023-11-23 10:24:42.059415: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2023-11-23 10:24:42.062589: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2023-11-23 10:24:42.069213: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2023-11-23 10:24:42.080495: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2023-11-23 10:24:42.082604: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2023-11-23 10:24:42.102753: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2200025000 Hz
+2023-11-23 10:24:42.107199: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1cb7f60 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2023-11-23 10:24:42.108076: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2023-11-23 10:24:42.407020: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x347d550 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2023-11-23 10:24:42.407854: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla V100-PCIE-32GB, Compute Capability 7.0
+2023-11-23 10:24:42.420314: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: Tesla V100-PCIE-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.38
+pciBusID: 0000:8a:00.0
+2023-11-23 10:24:42.421649: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2023-11-23 10:24:42.422348: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2023-11-23 10:24:42.423033: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2023-11-23 10:24:42.423840: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2023-11-23 10:24:42.424622: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2023-11-23 10:24:42.425544: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2023-11-23 10:24:42.426284: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2023-11-23 10:24:42.443120: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2023-11-23 10:24:42.444197: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2023-11-23 10:24:42.487366: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2023-11-23 10:24:42.488322: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0 
+2023-11-23 10:24:42.489135: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N 
+2023-11-23 10:24:42.530085: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 30593 MB memory) -> physical GPU (device: 0, name: Tesla V100-PCIE-32GB, pci bus id: 0000:8a:00.0, compute capability: 7.0)
+WARNING:tensorflow:Output bob missing from loss dictionary. We assume this was done on purpose. The fit and evaluate APIs will not be expecting any data to be passed to bob.
+WARNING:tensorflow:Output eve missing from loss dictionary. We assume this was done on purpose. The fit and evaluate APIs will not be expecting any data to be passed to eve.
+2023-11-23 10:24:47.063041: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2023-11-23 10:24:47.351191: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+Epoch   0:   0% | abe: 7.997 | eve: 7.998 | bob: 7.994Epoch   0:   0% | abe: 7.999 | eve: 7.986 | bob: 7.997Epoch   0:   1% | abe: 7.999 | eve: 7.989 | bob: 7.998Epoch   0:   2% | abe: 8.000 | eve: 7.996 | bob: 7.998Epoch   0:   3% | abe: 7.999 | eve: 7.994 | bob: 7.998Epoch   0:   3% | abe: 7.999 | eve: 7.995 | bob: 7.998Epoch   0:   4% | abe: 7.999 | eve: 7.995 | bob: 7.998Epoch   0:   5% | abe: 7.999 | eve: 7.993 | bob: 7.998Epoch   0:   6% | abe: 7.999 | eve: 7.994 | bob: 7.998
