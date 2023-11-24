@@ -1,6 +1,6 @@
 import pandas as pd
 num_files = 5
-curve = 'secp256r1'
+curve = 'secp384r1'
 cycles = 2
 
 loss = {'ABloss': 0, 'Bobloss': 0, 'Eveloss': 0}
