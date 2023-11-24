@@ -1624,3 +1624,27 @@ Decryption accuracy by Bob: 100.0%
 Number of correctly decrypted bits by Eve: 5698
 Decryption accuracy by Eve: 69.5556640625%
 
+Training complete.
+Curve: secp384r1Epochs: 20
+Batch size: 512
+Iterations per epoch: 128
+Alice-Bob cycles per iteration: 1
+Eve cycles per iteration: 2
+Total number of bits: 8192
+Number of correctly decrypted bits by Bob: 8192
+Decryption accuracy by Bob: 100.0%
+Number of correctly decrypted bits by Eve: 5617
+Decryption accuracy by Eve: 68.56689453125%
+
+Training complete.
+Curve: secp384r1Epochs: 20
+Batch size: 512
+Iterations per epoch: 128
+Alice-Bob cycles per iteration: 1
+Eve cycles per iteration: 1
+Total number of bits: 8192
+Number of correctly decrypted bits by Bob: 8192
+Decryption accuracy by Bob: 100.0%
+Number of correctly decrypted bits by Eve: 4184
+Decryption accuracy by Eve: 51.07421875%
+
