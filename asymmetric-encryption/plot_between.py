@@ -13,7 +13,7 @@ plt.ylim(0, 8)
 
 # Load each CSV file and plot
 num_files = 5
-curve = 'secp521r1'
+curve = 'secp384r1'
 cycles = 2
 
 ab_loss = []
