@@ -11,7 +11,7 @@ plt.rc('ytick', labelsize=25)  # fontsize of the tick labels
 plt.rc('legend', fontsize=25)  # fontsize of the legend
 plt.ylim(0, 8)
 
-# Load each CSV file and plot
+# Define the number of files, the curve and the number of cycles
 num_files = 5
 curve = 'secp521r1'
 cycles = 2
@@ -25,7 +25,7 @@ min_ab, max_ab = None, None
 min_bob, max_bob = None, None
 min_eve, max_eve = None, None
 
-# You only need to define x once if it's the same for all datasets
+# x is the same for all datasets
 x = list(range(0, 2559))
 
 for i in range(1, num_files + 1):
@@ -80,8 +80,7 @@ plt.plot(x, average_eve, color='red', linewidth=1,
 plt.grid(True, which='both', linestyle='--', linewidth=0.5)
 
 # Customization and saving the figure
-plt.xlabel('Iterations')  # Replace with your actual label
-plt.ylabel('Loss')  # Replace with your actual label
+plt.xlabel('Iterations') 
+plt.ylabel('Loss') 
 plt.legend()
-
 plt.savefig(f"new-figures/{curve}-{cycles}cycle.pdf", bbox_inches='tight')

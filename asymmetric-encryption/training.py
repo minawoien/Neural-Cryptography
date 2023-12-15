@@ -10,22 +10,20 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
-from key.ElipticCurve import generate_key_pair, curve
+from key.EllipticCurve import generate_key_pair, curve
 
-i = 5
+i = 5 # used to save the results to a different file
 curve = curve.name
 
 evelosses = []
 boblosses = []
 abelosses = []
 
-# number of training epochs, each time an epoch is completed, the model would have seen and learned from every example in the dataset once.
-n_epochs = 20
+n_epochs = 20 # number of training epochs
 batch_size = 512  # number of training examples utilized in one iteration
-# iterations per epoch, training examples divided by batch size
-n_batches = m_train // batch_size
+n_batches = m_train // batch_size # iterations per epoch, training examples divided by batch size
 abecycles = 1  # number of times Alice and Bob network train per iteration
-evecycles = 1  # number of times Eve network train per iteration
+evecycles = 1  # number of times Eve network train per iteration, use 1 or 2.
 
 epoch = 0
 start = time.time()
@@ -81,6 +79,7 @@ end = time.time()
 print(end - start)
 steps = -1
 
+# Save the loss values to a CSV file
 Biodata = {'ABloss': abelosses[:steps],
            'Bobloss': boblosses[:steps],
            'Eveloss': evelosses[:steps]}
@@ -97,9 +96,11 @@ plt.xlabel("Iterations", fontsize=13)
 plt.ylabel("Loss", fontsize=13)
 plt.legend(fontsize=13)
 
+# save the figure for the loss
 plt.savefig(
     f'{curve}/{evecycles}cycle/figures/restult-{i}.png')
 
+# Save the results to a text file
 with open('results.txt', "a") as f:
     f.write("Training complete.\n")
     f.write(f"Curve: {curve}")
@@ -113,16 +114,15 @@ with open('results.txt', "a") as f:
     m_batch = np.random.randint(
         0, 2, m_bits * batch_size).reshape(batch_size, m_bits).astype('float32')
     private_arr, public_arr = generate_key_pair(batch_size)
-    # guessing private key, input for eve should be cipertext and public key
+
+    # Alice encrypts the message
     cipher = alice.predict([m_batch, public_arr])
 
-    print(m_batch)  # original message
-
+    # Bob attempt to decrypt
     decrypted = bob.predict([cipher, private_arr])
-    print(decrypted)  # bob's attempt to decrypt
     decrypted_bits = np.round(decrypted).astype(int)
-    print(decrypted_bits)
 
+    # Calculate Bob's decryption accuracy
     correct_bits = np.sum(decrypted_bits == m_batch)
     total_bits = np.prod(decrypted_bits.shape)
     accuracy = correct_bits / total_bits * 100
@@ -131,10 +131,11 @@ with open('results.txt', "a") as f:
     print(f"Total number of bits: {total_bits}")
     print(f"Decryption accuracy: {accuracy}%")
 
+    # Eve attempt to decrypt
     eve_decrypted = eve.predict(cipher)
     eve_decrypted_bits = np.round(eve_decrypted).astype(int)
-    print(eve_decrypted_bits)
-
+    
+    # Calculate Eve's decryption accuracy
     correct_bits_eve = np.sum(eve_decrypted_bits == m_batch)
     total_bits = np.prod(eve_decrypted_bits.shape)
     accuracy_eve = correct_bits_eve / total_bits * 100
