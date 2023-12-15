@@ -14,5 +14,7 @@ The `average_loss.py` file is used to calculate the loss value of the ABE-model,
 
 ## Run the program
 To train the neural network, select the preferred curve in `EllipticCurve.py` and:
+
 ```cd  asymmetric-encryption```
+
 ```python training.py```
