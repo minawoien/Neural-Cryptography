@@ -1,7 +1,7 @@
 import pandas as pd
 num_files = 5
 curve = 'secp384r1'
-cycles = 2
+cycles = 1
 
 loss = {'ABloss': 0, 'Bobloss': 0, 'Eveloss': 0}
 

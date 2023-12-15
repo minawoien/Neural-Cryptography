@@ -3,8 +3,13 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 import numpy as np
 
-curve = ec.SECP384R1()
-
+# Set the elliptic curve
+# Curves used in the project:
+# curve = ec.SECP224R1()
+# curve = ec.SECP256R1()
+# curve = ec.SECP256K1()
+# curve = ec.SECP384R1()
+curve = ec.SECP521R1()
 
 def generate_key_pair(batch_size):
     # Generate ECC private key

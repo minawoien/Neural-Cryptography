@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6))
 plt.rc('font', size=12)  # controls default text size
 plt.rc('axes', titlesize=16)  # fontsize of the axes title
-plt.rc('axes', labelsize=14)  # fontsize of the x and y labels
-plt.rc('xtick', labelsize=12)  # fontsize of the tick labels
-plt.rc('ytick', labelsize=12)  # fontsize of the tick labels
-plt.rc('legend', fontsize=12)  # fontsize of the legend
+plt.rc('axes', labelsize=25)  # fontsize of the x and y labels
+plt.rc('xtick', labelsize=25)  # fontsize of the tick labels
+plt.rc('ytick', labelsize=25)  # fontsize of the tick labels
+plt.rc('legend', fontsize=25)  # fontsize of the legend
 plt.ylim(0, 8)
 
 # Load each CSV file and plot
 num_files = 5
-curve = 'secp384r1'
+curve = 'secp521r1'
 cycles = 2
 
 ab_loss = []
@@ -84,4 +84,4 @@ plt.xlabel('Iterations')  # Replace with your actual label
 plt.ylabel('Loss')  # Replace with your actual label
 plt.legend()
 
-plt.savefig(f"key-figures/{curve}-{cycles}cycle.pdf", bbox_inches='tight')
+plt.savefig(f"new-figures/{curve}-{cycles}cycle.pdf", bbox_inches='tight')
