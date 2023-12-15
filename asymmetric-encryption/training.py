@@ -10,7 +10,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from networks import alice, bob, eve, abemodel, m_train, m_bits, evemodel
-from key.EllipticCurve import generate_key_pair, curve
+from EllipticCurve import generate_key_pair, curve
 
 i = 5 # used to save the results to a different file
 curve = curve.name

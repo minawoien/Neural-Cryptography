@@ -2,7 +2,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Reshape, Flatten, Input, Dense, Conv1D, concatenate, Embedding
 from tensorflow.keras.optimizers import Adam
-from key.EllipticCurve import get_key_shape
+from EllipticCurve import get_key_shape
 
 # Set up the crypto parameters: message, key, and ciphertext bit lengths
 m_bits = 16  # message
