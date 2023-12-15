@@ -11,3 +11,8 @@ The `training.py` files contains the training of the ABE-model and Eve model. Th
 The `plot_between.py` file is used to generate the result figures used in the report. The figures created is the result of five iterations of the same curve and number of Eve cycles, and it uses the csv files from the folder `'curve'/'Evecycles'cycle`. The figures are stored in the `figures` folder.
 
 The `average_loss.py` file is used to calculate the loss value of the ABE-model, Bob and Eve after training. It calculates the average of the last loss value after five iterations with the same curve and number of Eve cycles. It uses the csv files from the folder `'curve'/'Evecycles'cycle`. 
+
+## Run the program
+To train the neural network, select the preferred curve in `EllipticCurve.py` and:
+```cd  asymmetric-encryption```
+```python training.py```
